@@ -5,7 +5,7 @@ pipeline {
 		registryCredential = "jaycobb-registry"
 		image = ""
 	}
-	agent none
+	agent any
 	stages {
 		stage('Test') {
 			steps {
