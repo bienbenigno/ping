@@ -1,4 +1,4 @@
-ipeline {
+pipeline {
 	environment {
 		registry = "https://jaycobb-registry:5000"
 		imageName = "jaycobb-registry:5000/ping"
