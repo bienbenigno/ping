@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="FLUENTD_HOST" value="logging.jaycobb.com"/>
+    <property name="FLUENTD_PORT" value="24224"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%highlight(%-5p) %cyan(%class{0}) - T=%X{currentTenant},U=%X{currentUserKey} - %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="fluent" class="ch.qos.logback.more.appenders.DataFluentAppender">
+        <tag>fluent.java.jaycobb</tag>
+        <label>thelabel</label>
+        <remoteHost>${FLUENTD_HOST}</remoteHost>
+        <port>${FLUENTD_PORT}</port>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%highlight(%-5p) %cyan(%class{0}) - T=%X{currentTenant},U=%X{currentUserKey} - %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.jaycobb" level="debug" additivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="fluent" />
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="console" />
+    </root>
+
+</configuration>
